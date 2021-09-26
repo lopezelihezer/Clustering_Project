@@ -20,7 +20,7 @@ def new_zillow_data():
     This function reads the zillow data from the Codeup db into a df.
     '''
     sql_query = """
-                SELECT bedroomcnt, bathroomcnt, calculatedfinishedsquarefeet, taxvaluedollarcnt, yearbuilt, taxamount, fips, transactiondate
+                SELECT *
                 FROM properties_2017
                 JOIN predictions_2017 USING (parcelid)
                 WHERE propertylandusetypeid IN ('261','260', '262', '263', '264', '265', '266', '268', '273', '276');
@@ -36,10 +36,10 @@ def get_zillow_data():
     This function reads in iris data from Codeup database, writes data to
     a csv file if a local file does not exist, and returns a df.
     '''
-    if os.path.isfile('zillow_df.csv'):
+    if os.path.isfile('zillow_df_all.csv'):
         
         # If csv file exists read in data from csv file.
-        df = pd.read_csv('zillow_df.csv', index_col=0)
+        df = pd.read_csv('zillow_df_all.csv', index_col=0)
         
     else:
         
@@ -47,7 +47,7 @@ def get_zillow_data():
         df = new_zillow_data()
         
         # Cache data
-        df.to_csv('zillow_df.csv')
+        df.to_csv('zillow_df_all.csv')
         
     return df
 
