@@ -135,21 +135,21 @@ def split(df):
 
 def make_vars():
     
-    target = "taxvalue"
-    clist = ['area', 'bed', 'bath']
+    target = "logerror"
+    
 
     # split train into X (dataframe, only col in list) & y (series, keep target only)
-    X_train = train[clist]
+    X_train = train.drop(columns=target)
     y_train = train[target]
     y_train = pd.DataFrame(y_train)
     
     # split validate into X (dataframe, only col in list) & y (series, keep target only)
-    X_validate = validate[clist]
+    X_validate = validate.drop(columns=target)
     y_validate = validate[target]
     y_validate = pd.DataFrame(y_validate)
 
     # split test into X (dataframe, only col in list) & y (series, keep target only)
-    X_test = test[clist]
+    X_test = test.drop(columns=target)
     y_test = test[target]
     y_test = pd.DataFrame(y_test)
     
